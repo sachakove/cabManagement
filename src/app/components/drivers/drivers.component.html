@@ -1,0 +1,57 @@
+<!-- Search -->
+<div class="row mx-auto">
+  <div class="card card-body">
+    <div class="form">
+      <div class="form-group">
+        <label>Name: </label>
+        <input type="text" class="form-control" name="fName" [(ngModel)]="fName" placeholder="Search Driver By Name">
+      </div>
+      <div class="form-group">
+        <label>Age: </label>
+        <input type="number" class="form-control" name="fAge" [(ngModel)]="fAge" placeholder="Search Driver By Age">
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#onModal">
+            <i class="fa fa-plus"></i> Add Driver</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-form #onModal></app-form>
+
+<!-- Drivers Display -->
+<div class="row mx-auto">
+  <div class="card" style="overflow:auto; height: 250px;">
+    <div class="list-group">
+      <li class="list-group-item" *ngFor="let driver of drivers | filter: fName || fAge">
+        <div class="row">
+          <div class="col-md-3 float-left pl-0">
+            <img class="" style="border-radius: 50%;" src="{{ driver.picture }}">
+          </div>
+          <div class="col-md-9 ml-0">
+            <h6><small><i class="fa fa-user" [class.text-success]="driver.isActive"> </i></small>
+              {{ driver.name }}
+              <span><button class="btn btn-sm btn-link float-right mt-0 ml-0" (click)="removeDriver(driver)"><i
+                class="fa fa-remove"></i></button></span>
+            </h6>
+            <div style="font-size: 10px;">Age: {{ driver.age }}
+              <span class="float-right">Tasks: {{ driver.tasks.length }}</span>
+            </div>
+            <div class="float-left mt-2" style="font-size: 12px;">
+              <a href="#" class="badge badge-success" *ngIf="!driver.isActive" (click)="driver.isActive = !driver.isActive">
+                MarkAsAcive</a>
+              <a href="#" class="badge badge-secondary" *ngIf="driver.isActive" (click)="driver.isActive = !driver.isActive">
+                MarkAsUnactive</a>
+              <a href="#" class="badge badge-primary" (click)="onDriver(driver)">ShowOnMap</a>
+              <a href="#" class="badge badge-warning" (click)="onShowLocation(driver)">ShowLocation</a>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>

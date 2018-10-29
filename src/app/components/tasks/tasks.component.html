@@ -1,0 +1,69 @@
+<!-- buttons -->
+<div class="mb-2">
+  <button class="btn btn-sm btn-danger mr-2" (click)="showAllTasks()">Show All Tasks</button>
+  <button class="btn btn-sm btn-warning mr-2" (click)="showUnTasks()">Show Unassigned Tasks</button>
+  <button class="btn btn-sm btn-secondary" (click)="show = !show" *ngIf="show">Hide Tasks</button>
+</div>
+
+<!-- display only selected driver (from app-drivers) -->
+<div class="row mb-4" style="overflow: auto; height: 300px" *ngIf="showDriver">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Active</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th></th>
+            <th>{{ currentDriver.name }}</th>
+            <th>{{ currentDriver.isActive }}</th>
+            <th>{{ currentDriver.age }}</th>
+            <th>{{ currentDriver.email }}</th>
+            <th>{{ currentDriver.address }}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- display tasks table -->
+<div class="row mb-4" style="overflow: auto; height: 300px" *ngIf="show">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Scheduled For</th>
+          <th>address</th>
+          <th>Assign</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of curTasks">
+          <th></th>
+          <th>{{ task.title }}</th>
+          <th>{{ task.scheduled_for }}</th>
+          <th>{{ task.address }}</th>
+          <th class="dropdown">
+              <a class="badge dropdown-toggle" href="#" role="button" toggle-target="dropdownMenuLink" data-toggle="dropdown">
+                Assign to driver
+              </a>
+              <div class="dropdown-menu" style="overflow: auto; height: 100px" id="dropdownMenuLink">
+                <a class="dropdown-item" href="#" *ngFor="let driver of drivers" (click)="scheduled(driver, task)">
+                  <span *ngIf="driver.isActive">{{ driver.name }}</span>
+                </a>
+              </div>
+            </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

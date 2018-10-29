@@ -1,0 +1,9 @@
+.driver-link {
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+
+.driver-link:hover {
+    border: 1px dashed #ffc107;
+}

@@ -1,0 +1,33 @@
+<agm-map [latitude]="lat" [longitude]="lng" *ngIf="!showDriver && !showAllMap && !showUnMap">
+  <agm-marker *ngFor="let driver of drivers" [latitude]="driver.latitude" [longitude]="driver.longitude"></agm-marker>
+</agm-map>
+
+<agm-map [latitude]="lat" [longitude]="lng" *ngIf="!showDriver && (showAllMap || showUnMap)">
+  <agm-marker *ngFor="let m of markers" 
+    [latitude]="m.latitude" 
+    [longitude]="m.longitude"
+    [iconUrl]="tasksMarks"
+    >
+  </agm-marker>
+</agm-map>
+
+<agm-map [latitude]="lat" [longitude]="lng" *ngIf="showDriver && !showAllMap && !showUnMap">
+  <agm-marker *ngIf="showMarker" [latitude]="currentDriver.latitude" [longitude]="currentDriver.longitude">
+  </agm-marker>
+  <agm-info-window *ngIf="location" [isOpen]="true" [latitude]="currentDriver.latitude" [longitude]="currentDriver.longitude">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <img alt="{{ currentDriver.name }}" src="{{ currentDriver.picture }}">
+        </div>
+        <div class="col-md-8">
+          <div class="mt-3">
+            Name: {{ currentDriver.name }}
+            <br> Latitude: {{ currentDriver.latitude }}
+            <br> Longitude: {{ currentDriver.longitude }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </agm-info-window>
+</agm-map>
