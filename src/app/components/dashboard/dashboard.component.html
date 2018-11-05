@@ -3,7 +3,7 @@
     <div class="col-md-4">
       <app-drivers 
         [drivers]="drivers" 
-        (currentDriver)="onCurrentDriver($event)"
+        (driverMarker)="onShowMarker($event)"
         (showLocation)="onShowLocation($event)"
         >
       </app-drivers>
@@ -13,12 +13,10 @@
         [drivers]="drivers"
         [tasks]="tasks"
         [schTasks]="schTasks"
-        [currentDriver]="currentDriver" 
-        [showDriver]="showDriver"
+        [driverMarker]="driverMarker" 
+        [driverLocation]="driverLocation"
         [showAllMap]="showAllMap"
         [showUnMap]="showUnMap"
-        [location]="location"
-        [showMarker]="showMarker"
         >
       </app-map>
     </div>
@@ -30,7 +28,6 @@
         [schTasks]="schTasks" 
         [drivers]="drivers" 
         [currentDriver]="currentDriver"
-        [showDriver]="showDriver"
         (showAll)="showAll()"
         (showUn)="showUn()"
         >

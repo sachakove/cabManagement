@@ -30,7 +30,10 @@ export class TasksComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.currentDriver) {
-      this.show = false;
+      if(this.currentDriver !== undefined) {
+        this.show = false;
+        this.showDriver = true;
+      }
     }
   }
 
@@ -46,6 +49,7 @@ export class TasksComponent implements OnInit, OnChanges {
     this.show = true;
     this.unTasks = false;
     this.curTasks = this.tasks;
+    this.showDriver = false;
     this.showAll.emit();
   }
 
@@ -53,6 +57,7 @@ export class TasksComponent implements OnInit, OnChanges {
     this.unTasks = !this.unTasks;
     this.show = true;
     this.allTasks = false;
+    this.showDriver = false;
     this.curTasks = this.schTasks;
     this.showUn.emit();
   }

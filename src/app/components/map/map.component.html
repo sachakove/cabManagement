@@ -12,19 +12,19 @@
 </agm-map>
 
 <agm-map [latitude]="lat" [longitude]="lng" *ngIf="showDriver && !showAllMap && !showUnMap">
-  <agm-marker *ngIf="showMarker" [latitude]="currentDriver.latitude" [longitude]="currentDriver.longitude">
+  <agm-marker *ngIf="showMarker" [latitude]="driverMarker.latitude" [longitude]="driverMarker.longitude">
   </agm-marker>
-  <agm-info-window *ngIf="location" [isOpen]="true" [latitude]="currentDriver.latitude" [longitude]="currentDriver.longitude">
+  <agm-info-window *ngIf="location" [isOpen]="true" [latitude]="driverLocation.latitude" [longitude]="driverLocation.longitude">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <img alt="{{ currentDriver.name }}" src="{{ currentDriver.picture }}">
+          <img alt="{{ driverLocation.name }}" src="{{ driverLocation.picture }}">
         </div>
         <div class="col-md-8">
           <div class="mt-3">
-            Name: {{ currentDriver.name }}
-            <br> Latitude: {{ currentDriver.latitude }}
-            <br> Longitude: {{ currentDriver.longitude }}
+            Name: {{ driverLocation.name }}
+            <br> Latitude: {{ driverLocation.latitude }}
+            <br> Longitude: {{ driverLocation.longitude }}
           </div>
         </div>
       </div>

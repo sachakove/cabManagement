@@ -14,8 +14,9 @@ export class DashboardComponent implements OnInit, OnChanges {
   drivers: Driver[] = []; // array with all drivers (from service)
   tasks: Task[] = []; // array with all tasks (from service)
   schTasks: Task[] = []; // array whith unscheduled tasks (from service)
-  showDriver: boolean = false; // whether to display or not currentDriver on the map (info or marker) & table 
-  currentDriver: Driver; // selected driver
+  currentDriver: Driver; // display currentDriver on the table 
+  driverMarker: Driver; // selected driver
+  driverLocation: Driver; // selected driver
   showAllMap: boolean = false; // whether to display or not all tasks (scheduled & unscheduled)
   showUnMap: boolean = false; // whether to display or not unscheduled tasks
   location: boolean = false; // whether to display or not info-window about the currentDriver
@@ -47,35 +48,29 @@ export class DashboardComponent implements OnInit, OnChanges {
   }
 
   // getting the selected driver from the drivers-component
-  onCurrentDriver(driver: Driver) {
-    this.currentDriver = driver;
-    this.showDriver = true; // show currentDriver on the map (info or marker)
-    this.showMarker = true; // display marker instand info-window
-    this.location = false;
+  onShowMarker(driver: Driver) {
+    this.driverMarker = driver;
     this.showUnMap = false;
     this.showAllMap = false;
+    this.currentDriver = driver;
   }
 
    // getting the selected driver from the drivers-component
    onShowLocation(driver: Driver) {
-    this.currentDriver = driver;
-    this.showMarker = false;
-    this.location = true; // display info-window instand marker
-    this.showDriver = true; // show currentDriver on the map (info or marker)
+    this.driverLocation = driver;
     this.showUnMap = false;
     this.showAllMap = false;
+    this.currentDriver = driver;
   }
 
   // displaying all tasks on the map and table (from app-tasks)
   showAll() {
-    this.showDriver = false;
     this.showUnMap = false;
     this.showAllMap = true;
   }
 
   // displaying unsceduled tasks on the map and table (from app-tasks)
   showUn() {
-    this.showDriver = false;
     this.showAllMap = false
     this.showUnMap = true;
   }

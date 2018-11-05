@@ -13,6 +13,8 @@ export class DriversComponent implements OnInit {
   @Input() drivers: Driver[]; // drivers array from dashboard
   @Output() currentDriver: EventEmitter<Driver> = new EventEmitter(); // passes the selected driver to dashboard
   @Output() showLocation: EventEmitter<Driver> = new EventEmitter(); // passes event to dashboard to display info-window
+  @Output() driverMarker: EventEmitter<Driver> = new EventEmitter(); // event to show driver on map (as marker) & on tasks
+  @Output() driverLocation: EventEmitter<Driver> = new EventEmitter(); // event to show driver on map (as info-win) & on tasks
 
   constructor(private service: MainService) { }
 
@@ -20,11 +22,14 @@ export class DriversComponent implements OnInit {
   }
 
   onShowLocation(driver: Driver) {
+    // this.showLocation.emit(driver);
     this.showLocation.emit(driver);
+    
   }
 
   onDriver(driver:Driver) {
-    this.currentDriver.emit(driver);
+    // this.currentDriver.emit(driver);
+    this.driverMarker.emit(driver);
   }
 
   // remove selected driver from the list

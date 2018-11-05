@@ -14,12 +14,13 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() drivers: Driver[]; // getting drivers list from dashboard
   @Input() tasks: Task[]; // getting tasks list from dashboard
   @Input() schTasks: Task[]; // getting unscheduled tasks from dashboard
-  @Input() currentDriver: Driver; // getting selected driver (from app-drivers --> app-dashboard)
-  @Input() showDriver: boolean; // 
-  @Input() showAllMap: boolean;
-  @Input() showUnMap: boolean;
-  @Input() location: boolean;
-  @Input() showMarker: boolean;
+  @Input() driverMarker: Driver; // getting selected driver (from app-drivers --> app-dashboard)
+  @Input() driverLocation: Driver; // getting selected driver (from app-drivers --> app-dashboard)
+  @Input() showAllMap: boolean = false;
+  @Input() showUnMap: boolean = false;
+  showDriver: boolean = false;
+  location: boolean = false;
+  showMarker: boolean = false;
   tasksMarks: string = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
   markers: Marker[] = [];
   marker: Marker = {
@@ -31,21 +32,42 @@ export class MapComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.showAllMap) {
+    if (changes.driverMarker) {
+      if (this.driverMarker !== undefined) {
+        this.showDriver = true;
+        this.showMarker = true;
+        this.showAllMap = false;
+        this.showUnMap = false;
+        this.location = false;
+      }
+    }
+    if (changes.driverLocation) {
+      if (this.driverLocation !== undefined) {
+        this.showDriver = true;
+        this.location = true;
+        this.showMarker = false;
+        this.showAllMap = false;
+        this.showUnMap = false;
+      }
+    }
+
+    if(changes.showAllMap || changes.showUnMap) {
       this.markers.splice(0, this.markers.length);
       if(this.showAllMap === true) {
+        this.showDriver = false;
+        this.location = false;
+        this.showMarker = false;
         this.allTasks();
       }
       if(this.showUnMap === true) {
+        this.showDriver = false;
+        this.location = false;
+        this.showMarker = false;
         this.notScheduledTasks();
       }
-    }
-    if(this.location === true) {
-      console.log(this.showUnMap, this.showAllMap, this.location, this.showDriver);
-      console.log(this.currentDriver);
     }
   }
 
